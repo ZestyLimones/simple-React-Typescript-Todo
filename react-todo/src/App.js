@@ -11,6 +11,13 @@ function App() {
     { rowNumber: 4, rowDescription: 'charge phone', rowAssign: 'user 2' },
   ]);
 
+  const deleteTodo = (deleteTodoRowNumber) => {
+    let filtered = todos.filter(function (value) {
+      return value.rowNumber !== deleteTodoRowNumber;
+    });
+    setTodos(filtered);
+  };
+
   const addTodo = (description, assigned) => {
     let rowNumber = 0;
     if (todos.length > 0) {
@@ -31,7 +38,7 @@ function App() {
       <div className="card">
         <div className="card-header">Your Todo's</div>
         <div className="card-body">
-          <TodoTable todos={todos} />
+          <TodoTable todos={todos} deleteTodo={deleteTodo} />
           <NewTodoForm addTodo={addTodo} />
         </div>
       </div>
