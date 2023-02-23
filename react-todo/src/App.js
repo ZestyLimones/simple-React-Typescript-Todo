@@ -11,15 +11,19 @@ function App() {
     { rowNumber: 4, rowDescription: 'charge phone', rowAssign: 'user 2' },
   ]);
 
-  const addTodo = () => {
+  const addTodo = (description, assigned) => {
+    let rowNumber = 0;
     if (todos.length > 0) {
-      const newTodo = {
-        rowNumber: todos.length + 1,
-        rowDescription: 'new Todo',
-        rowAssign: 'user 3',
-      };
-      setTodos((todos) => [...todos, newTodo]);
+      rowNumber = todos[todos.length - 1].rowNumber + 1;
+    } else {
+      rowNumber = 1;
     }
+    const newTodo = {
+      rowNumber: rowNumber,
+      rowDescription: description,
+      rowAssign: assigned,
+    };
+    setTodos((todos) => [...todos, newTodo]);
   };
 
   return (
@@ -28,7 +32,7 @@ function App() {
         <div className="card-header">Your Todo's</div>
         <div className="card-body">
           <TodoTable todos={todos} />
-          <NewTodoForm />
+          <NewTodoForm addTodo={addTodo} />
         </div>
       </div>
     </div>
